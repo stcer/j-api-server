@@ -1,0 +1,65 @@
+{
+    "name": "stcer/japi",
+    "authors": [
+        {
+            "name": "stcer",
+            "email": "7443930@qq.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": {
+            "j\\api\\": "src/"
+        }
+    },
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@192.168.0.252:repos/ide_doc.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@192.168.0.252:repos/j.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@192.168.0.252:repos/j_tcp.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@192.168.0.252:repos/j_http.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@192.168.0.252:repos/syar.git"
+        },
+        {
+            "type": "vcs",
+            "url":  "git@192.168.0.252:repos/j_log.git"
+        },
+        {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        },
+        {"packagist": false}
+    ],
+
+    "require": {
+        "ext-yar" : "*",
+        "stcer/jtcp" : "dev-master",
+        "stcer/jhttp" : "dev-master",
+        "stcer/syar" : "dev-master",
+        "stcer/jlog" : "dev-master"
+    },
+
+    "require-dev" : {
+        "stcer/j" : "dev-master",
+        "stcer/jdoc" : "*",
+        "lox/xhprof" : "dev-master"
+    },
+
+    "config" : {
+        "secure-http" : false
+    }
+}
