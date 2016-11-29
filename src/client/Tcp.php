@@ -8,7 +8,7 @@ use j\network\tcp\Client;
  * Class Tcp
  * @package j\api\client
  */
-class Tcp extends BaseAbstract  {
+class Tcp extends Base  {
     /**
      * @var Client
      */

@@ -3,9 +3,8 @@
 namespace j\api\server;
 
 use j\api\Exception;
-use j\api\Loader;
-use j\api\response;
 use j\api\base\ArrayUtils;
+use j\api\base\JsonOutput;
 use j\api\base\Strings;
 
 /**
@@ -14,6 +13,7 @@ use j\api\base\Strings;
  * news.search
  */
 class FpmApp extends Base {
+
     public $request;
     public $response;
 
@@ -86,11 +86,11 @@ class FpmApp extends Base {
     }
 
     /**
-     * @return response\JSON
+     * @return JsonOutput
      */
     protected function getResponse(){
         if(!isset($this->response)){
-            $this->response = new response\JSON();
+            $this->response = new JsonOutput();
         }
         return $this->response;
     }

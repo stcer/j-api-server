@@ -9,12 +9,12 @@ use Yar_Concurrent_Client;
  * Class SwooleYar
  * @package j\api\client
  */
-class SwooleYar extends BaseAbstract {
+class SwooleYar extends Base {
 
     /**
      * @var string
      */
-    public static $serverUrl = 'http://127.0.0.1:8062';
+    public static $serverUrl = '';
 
     /**
      * @var string
@@ -39,8 +39,7 @@ class SwooleYar extends BaseAbstract {
      * @return mixed
      */
     public function callApi($api, $args, $init = array()) {
-        $url = ($this->serverAddress ?: static::$serverUrl);
-        $url .= "/" . $this->formatApi($api);
+        $url = $this->getRemoteUrl("/" . $this->formatApi($api), 'path');
         $query = '?' . http_build_query(['init' => $init]);
         $client = new Yar_client($url . $query);
         return call_user_func_array(array($client, self::$defaultMethod), $args);
@@ -58,7 +57,7 @@ class SwooleYar extends BaseAbstract {
         // swoole yar server
         // request path : /multiple
         // request method : calls
-        $client = new Yar_client(($this->serverAddress ?: static::$serverUrl) . "/multiple");
+        $client = new Yar_client($this->getRemoteUrl("/multiple", 'path'));
 
         $this->formatRequests($request);
         foreach($request as $key => $value){
@@ -76,11 +75,9 @@ class SwooleYar extends BaseAbstract {
      */
     public function asyncCalls($request) {
         $data = [];
-        $server = ($this->serverAddress ?: static::$serverUrl);
-
         $this->formatRequests($request);
         foreach($request as $i => $r){
-            $url = $server ."?api={$r['api']}";
+            $url = $this->getRemoteUrl("api={$r['api']}");
             Yar_Concurrent_Client::call($url, self::$defaultMethod, $r['params'],
                 function($rs) use ($i, &$data){
                     $data[$i] = $rs;

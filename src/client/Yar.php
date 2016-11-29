@@ -9,17 +9,12 @@ use Yar_Concurrent_Client;
  * Class SwooleYar
  * @package j\api\client
  */
-class Yar extends BaseAbstract {
+class Yar extends Base {
 
     /**
      * @var string
      */
-    public static $serverUrl = 'http://jzf.x1.cn/api/www/yar';
-
-    /**
-     * @var string
-     */
-    public $serverAddress = '';
+    public static $serverUrl = '';
 
     /**
      * @var static[]
@@ -34,7 +29,7 @@ class Yar extends BaseAbstract {
      */
     public function callApi($api, $args, $init = array()) {
         $query = http_build_query(['init' => $init]);
-        $url = ($this->serverAddress ?: static::$serverUrl) . "?api={$api}&{$query}";
+        $url = $this->getRemoteUrl("&api={$api}&{$query}");
         $client = new Yar_client($url);
         return call_user_func_array(array($client, "yar"), $args);
     }
@@ -47,9 +42,11 @@ class Yar extends BaseAbstract {
         $this->formatRequests($request);
 
         $data = [];
-        $server = ($this->serverAddress ?: static::$serverUrl);
         foreach ($request as $i => $r) {
-            $url = $server . "?api={$r['api']}";
+//            $api = explode($r['api'], '.');
+//            $method = array_pop($api);
+
+            $url = $this->getRemoteUrl("&api={$r['api']}");
             Yar_Concurrent_Client::call($url, 'yar', $r['params'],
                 function ($rs) use ($i, &$data) {
                     $data[$i] = $rs;

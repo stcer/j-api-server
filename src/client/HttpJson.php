@@ -9,12 +9,12 @@ use Exception;
  * Class SwooleYar
  * @package j\api\client
  */
-class HttpJson extends BaseAbstract {
+class HttpJson extends Base {
 
     /**
      * @var string
      */
-    public static $serverUrl = 'http://jzf.x1.cn/api/www/index.php';
+    public static $serverUrl = '';
 
     /**
      * @var string
@@ -34,9 +34,7 @@ class HttpJson extends BaseAbstract {
      * @throws Exception
      */
     public function callApi($api, $args = [], $init = array()){
-        $server = ($this->serverAddress ?: static::$serverUrl);
-
-        $url = $server . '?api=' . $api;
+        $url = $this->getRemoteUrl('api=' . $api);
         $query = '&' . http_build_query(['args' => $args, 'init' => $init]);
 
         $http = new Client();

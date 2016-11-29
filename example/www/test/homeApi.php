@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL ^ E_NOTICE);
 
 use j\debug\Profiler;
-use j\api\client\BaseAbstract;
+use j\api\client\Base;
 use j\api\client\SwooleYar as ClientYar;
 use j\api\client\Tcp as ClientTcp;
 use j\api\client\Yar as ClientFpmYar;
@@ -88,7 +88,7 @@ class HomeApiTest {
 
     /**
      * @param $type
-     * @return BaseAbstract
+     * @return Base
      * @throws Exception
      */
     static function getClient($type) {

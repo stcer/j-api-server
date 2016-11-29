@@ -9,3 +9,12 @@
 # 字符编码
 *   服务端api接口数据编码方式受 $server->charset控制
 *   所有客户端的请求参数为utf8编码
+
+# 地址格式
+*   fpm http : server_url?api=&args=&init=
+*   swoole http: 
+    1. server_url/api/API_NAME?args=&init= 
+    2. server_url/calls?data=REQUESTS
+*   swoole yar: (method=yar)
+    1. server_url/API_NAME?args=&init= 
+    2. server_url/multiple

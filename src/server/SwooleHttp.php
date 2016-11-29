@@ -12,7 +12,7 @@ use j\api\base\JsonPretty;
 use j\api\base\Strings;
 
 /**
- * Class AppSwooleHttp
+ * Class SwooleHttp
  * @package j\api
  *
  */
@@ -36,6 +36,7 @@ class SwooleHttp extends Base {
      */
     public function run(){
         $server = $this->server = new Server($this->host, $this->port);
+
         $server->cgiPathPrefix = "/api/";
         $server->documentRoot = dirname(__DIR__) . "/document/";
         $server->dynamicParser = array($this, 'handle');

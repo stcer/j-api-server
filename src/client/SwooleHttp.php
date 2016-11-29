@@ -9,12 +9,12 @@ use Exception;
  * Class SwooleYar
  * @package j\api\client
  */
-class SwooleHttp extends BaseAbstract {
+class SwooleHttp extends Base {
 
     /**
      * @var string
      */
-    public static $serverUrl = 'http://127.0.0.1:8061';
+    public static $serverUrl = '';
 
     /**
      * @var string
@@ -34,8 +34,7 @@ class SwooleHttp extends BaseAbstract {
      * @throws Exception
      */
     public function callApi($api, $args = [], $init = array()){
-        $server = ($this->serverAddress ?: static::$serverUrl);
-        $url = $server . '/api/' . str_replace('.', '/', $api) . '?';
+        $url = $this->getRemoteUrl('/api/' . str_replace('.', '/', $api), 'path');
         $query = http_build_query(['args' => $args, 'init' => $init]);
         return $this->request($url, $query);
     }
@@ -47,8 +46,7 @@ class SwooleHttp extends BaseAbstract {
      */
     public function asyncCalls($request){
         $this->formatRequests($request);
-        $server = ($this->serverAddress ?: static::$serverUrl);
-        $url = $server . '/api/calls/?';
+        $url = $this->getRemoteUrl('/api/calls', 'path');
         $query = http_build_query(['data' => $request]);
         $data = $this->request($url, $query);
         $tmp = [];

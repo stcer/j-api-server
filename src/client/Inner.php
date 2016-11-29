@@ -8,7 +8,7 @@ use j\api\Loader;
  * Class Inner
  * @package j\api\client
  */
-class Inner extends BaseAbstract{
+class Inner extends Base{
     static public $apiMaps = [
         'region' => 'comm.region'
         ];

@@ -1,13 +1,17 @@
 <?php
 
-
 namespace j\api\client;
+use j\api\Exception;
 
 /**
  * Class Base
  */
-abstract class BaseAbstract {
+abstract class Base {
+    /**
+     * @var string
+     */
     public $prefix;
+
     protected $params = [];
 
     /**
@@ -67,13 +71,16 @@ abstract class BaseAbstract {
     /**
      * @param $requests
      * @return mixed
+     * @throws Exception
      */
     protected function formatRequests(& $requests){
         foreach($requests as $key => $r){
             $c = count($r);
+
             if(!($c == 2 || $c === 3)){
-                continue;
+                throw new Exception("Invalid request params");
             }
+
             if(!is_numeric(key($r))){
                 continue;
             }
@@ -101,5 +108,33 @@ abstract class BaseAbstract {
             $data = $url . (strpos($url, '?') ? "&" : '?') . urlencode($data);
         }
         return $data;
+    }
+
+    /**
+     * @var string
+     */
+    public static $serverUrl = '';
+
+    /**
+     * @var string
+     */
+    public $serverAddress = '';
+
+    /**
+     * @param string $suffix
+     * @param string $type
+     * @return string
+     * @throws Exception
+     */
+    protected function getRemoteUrl($suffix = '', $type = "args"){
+        $url = $this->serverAddress ?: static::$serverUrl;
+        if(!$url){
+            throw new Exception("Invalid server address");
+        }
+        if($type == 'args'){
+            return $url .  (strpos($url, '?') ? '&' : '?')  . $suffix;
+        } else {
+            return $url . $suffix;
+        }
     }
 }

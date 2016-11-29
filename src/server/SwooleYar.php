@@ -17,6 +17,11 @@ class SwooleYar extends Base {
     public $options = [];
 
     /**
+     * @var static[]
+     */
+    static $instance;
+
+    /**
      * @var callback
      */
     public $onServerCreate;

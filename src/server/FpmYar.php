@@ -8,6 +8,12 @@ use j\api\Loader;
 use j\api\Exception;
 
 class FpmYar extends Base{
+
+    /**
+     * @var static[]
+     */
+    static $instance;
+
     /**
      * 由api来确定class及action
      * 远程调用的method应该永远为 yar

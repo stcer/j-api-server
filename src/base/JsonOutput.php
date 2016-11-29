@@ -1,15 +1,13 @@
 <?php
 
-namespace j\api\response;
-
-use j\api\base\JsonPretty;
+namespace j\api\base;
 
 /**
  * Class AppJson
  * news.cat.name
  * news.search
  */
-class JSON{
+class JsonOutput{
     function send($data, $pretty = false, $charset = 'utf8'){
         if($charset == 'gbk'){
             $data = self::utf8($data);
