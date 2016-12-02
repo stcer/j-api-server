@@ -16,7 +16,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@192.168.0.252:repos/ide_doc.git"
+            "url":  "git@192.168.0.252:repos/ide-doc.git"
         },
         {
             "type": "vcs",
@@ -36,7 +36,7 @@
         },
         {
             "type": "vcs",
-            "url":  "git@192.168.0.252:repos/j-log.git"
+            "url":  "git@192.168.0.252:repos/j-db.git"
         },
         {
             "type": "composer",
@@ -50,12 +50,12 @@
         "stcer/j-tcp" : "dev-master",
         "stcer/j-http" : "dev-master",
         "stcer/syar" : "dev-master",
-        "stcer/j-log" : "dev-master"
+        "stcer/j-core" : "dev-master"
     },
 
     "require-dev" : {
-        "stcer/j-core" : "dev-master",
-        "stcer/ide_doc" : "*",
+        "stcer/ide-doc" : "*",
+        "stcer/j-db" : "dev-master",
         "lox/xhprof" : "dev-master"
     },
 
