@@ -1,5 +1,5 @@
 {
-    "name": "stcer/japi",
+    "name": "stcer/j-api",
     "authors": [
         {
             "name": "stcer",
@@ -20,15 +20,15 @@
         },
         {
             "type": "vcs",
-            "url":  "git@192.168.0.252:repos/j.git"
+            "url":  "git@192.168.0.252:repos/j-core.git"
         },
         {
             "type": "vcs",
-            "url":  "git@192.168.0.252:repos/j_tcp.git"
+            "url":  "git@192.168.0.252:repos/j-tcp.git"
         },
         {
             "type": "vcs",
-            "url":  "git@192.168.0.252:repos/j_http.git"
+            "url":  "git@192.168.0.252:repos/j-http.git"
         },
         {
             "type": "vcs",
@@ -36,7 +36,7 @@
         },
         {
             "type": "vcs",
-            "url":  "git@192.168.0.252:repos/j_log.git"
+            "url":  "git@192.168.0.252:repos/j-log.git"
         },
         {
             "type": "composer",
@@ -47,15 +47,15 @@
 
     "require": {
         "ext-yar" : "*",
-        "stcer/jtcp" : "dev-master",
-        "stcer/jhttp" : "dev-master",
+        "stcer/j-tcp" : "dev-master",
+        "stcer/j-http" : "dev-master",
         "stcer/syar" : "dev-master",
-        "stcer/jlog" : "dev-master"
+        "stcer/j-log" : "dev-master"
     },
 
     "require-dev" : {
-        "stcer/j" : "dev-master",
-        "stcer/jdoc" : "*",
+        "stcer/j-core" : "dev-master",
+        "stcer/ide_doc" : "*",
         "lox/xhprof" : "dev-master"
     },
 
