@@ -86,7 +86,7 @@ function test($types = ['swooleYar', 'fpmYar']){
     $times = [];
     foreach($types as $type){
         $timer->start();
-        testBatch(getClient($type)); 
+        testBatch(getClient($type));
         //testBatch1(getClient($type));
         testObject(getClient($type, 'test'));
         $times[$type] = $timer->stop();
