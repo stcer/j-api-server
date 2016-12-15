@@ -8,4 +8,4 @@ composer.lock
 
 ## Directory-based project format:
 .idea/
-vendor/
+/vendor
