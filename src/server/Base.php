@@ -6,12 +6,16 @@ use j\api\Loader;
 use j\api\Base as Action;
 use j\api\Exception;
 use j\api\Document;
+use j\log\TraitLog;
 
 /**
  * Class Base
  * @package j\api\server
  */
 class Base {
+
+    use TraitLog;
+
     public $loader;
     public $isInner = 1;
     public $charset = "utf8";

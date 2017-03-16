@@ -53,6 +53,9 @@ class FpmApp extends Base {
             var_dump($data);
         }
 
+        $this->log("request: {$_SERVER['REQUEST_URI']}", 'debug');
+        $this->log($data, 'debug');
+
         $response->send($data, ArrayUtils::gav($req, 'pretty', false), $this->charset);
     }
 
