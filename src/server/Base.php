@@ -115,5 +115,4 @@ class Base {
         $method = str_replace('document.', '', $api);
         return call_user_func_array(array($doc, $method), $args);
     }
-
 }

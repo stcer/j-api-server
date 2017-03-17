@@ -1,6 +1,6 @@
 <?php
 
-namespace j\api\client;
+namespace j\api;
 
 use j\api\client\Base as Abase;
 
@@ -8,7 +8,7 @@ use j\api\client\Base as Abase;
  * Class Inner
  * @package j\api\client
  */
-class Inner extends Abase{
+class InnerClient extends Abase{
     static public $apiMaps = [
         'region' => 'comm.region'
         ];
