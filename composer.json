@@ -32,7 +32,12 @@
         "stcer/j-tcp" : "dev-master",
         "stcer/j-http" : "dev-master",
         "stcer/syar" : "dev-master",
-        "stcer/j-core" : "dev-master"
+        "stcer/j-core" : "dev-master",
+        "stcer/j-api-client": "dev-master"
+    },
+
+    "suggest": {
+        "stcer/j-api-client": ""
     },
 
     "require-dev" : {

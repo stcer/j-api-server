@@ -30,4 +30,3 @@ $di->set('config', $config);
 $di->registerProviders([
     'j\db\ServiceProvider'
 ]);
-

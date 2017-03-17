@@ -7,7 +7,7 @@ use j\debug\Profiler;
 use j\api\client\Base;
 use j\api\client\SwooleYar as ClientYar;
 use j\api\client\Tcp as ClientTcp;
-use j\api\client\Yar as ClientFpmYar;
+use j\api\client\FpmYar as ClientFpmYar;
 use j\api\client\HttpJson as FpmHttpJson;
 use j\api\client\SwooleHttp;
 
