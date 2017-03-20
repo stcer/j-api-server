@@ -1,14 +1,15 @@
 <?php
 
 # 127.0.0.1:8061
-require(__DIR__ . '/init.inc.php');
+require(__DIR__ . '/../init.inc.php');
 
 use j\api\server\SwooleHttp as Server;
 use j\network\http\Server as HttpServer;
 use j\log\Log;
 
 $server = new Server();
-$server->options['pid_file'] = __DIR__ . "/api_swoole_http.pid";
+$server->port = 8603;
+$server->options['pid_file'] = PATH_ROOT . "/tmp/pid/api_swoole_http.pid";
 //$server->options['daemonize'] = true;
 
 $server->getDocReader()->setApiPath(__DIR__ . '/action/');

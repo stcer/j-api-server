@@ -1,0 +1,29 @@
+<div class="modal fade" id="myModal"
+     tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">接口测试</h4>
+            </div>
+            <div class="modal-body">
+                <h3>{{api}}.{{func.name}}</h3>
+                <pre v-if="hasDoc">{{func.doc}}</pre>
+                <form>
+                    <div class="form-group" v-for="arg in func.args">
+                        <label for="exampleInputEmail1">{{arg.name}}</label>
+                        <input type="text" class="form-control" v-model="arg.value"
+                               placeholder="{{arg.value != undefined ? arg.value : ''}}">
+                    </div>
+                </form>
+                <strong>请求地址</strong>
+                {{url}}
+            </div>
+            <div class="modal-footer">
+                <a href="{{url}}" target="_blank" class="btn btn-primary">Submit</a>
+            </div>
+        </div>
+    </div>
+</div>

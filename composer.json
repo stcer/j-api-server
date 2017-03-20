@@ -32,8 +32,7 @@
         "stcer/j-tcp" : "dev-master",
         "stcer/j-http" : "dev-master",
         "stcer/syar" : "dev-master",
-        "stcer/j-core" : "dev-master",
-        "stcer/j-api-client": "dev-master"
+        "stcer/j-core" : "dev-master"
     },
 
     "suggest": {
@@ -43,7 +42,8 @@
     "require-dev" : {
         "stcer/ide-doc" : "*",
         "stcer/j-db" : "dev-master",
-        "lox/xhprof" : "dev-master"
+        "lox/xhprof" : "dev-master",
+        "stcer/j-api-client": "dev-master"
     },
 
     "config" : {
