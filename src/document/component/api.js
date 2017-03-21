@@ -2,6 +2,8 @@ Vue.filter('annotation', function (value) {
     return "    " +  value;
 });
 
+SyncComponent.create('testForm');
+SyncComponent.create('initParams');
 
 var exports =  {
     template: 'api.html',

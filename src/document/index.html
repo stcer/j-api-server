@@ -55,7 +55,7 @@
             <h4>Api list</h4>
 
             <div class="list-group">
-                <router-link
+                <router-link class="list-group-item"
                         v-for="name in apis"
                         :to="{path : '/api/' + name}">{{name}}</router-link>
             </div>
