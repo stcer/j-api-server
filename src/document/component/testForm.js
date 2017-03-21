@@ -10,10 +10,6 @@ var exports = {
     },
 
     computed: {
-        isWelcome : function(){
-            return this.api.length > 0;
-        },
-
         hasDoc : function(){
             return this.func.doc.length > 0;
         },

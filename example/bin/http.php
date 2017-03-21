@@ -12,9 +12,9 @@ $server->port = 8603;
 $server->options['pid_file'] = PATH_ROOT . "/tmp/pid/api_swoole_http.pid";
 //$server->options['daemonize'] = true;
 
-$server->getDocReader()->setApiPath(__DIR__ . '/action/');
-$server->getDocReader()->apiFilePattern = '/Service.php$/';
-$server->getLoader()->classSuffix = 'Service';
+$server->getDocReader()->setApiPath(dirname(__DIR__) . '/action/');
+//$server->getDocReader()->apiFilePattern = '/Service.php$/';
+//$server->getLoader()->classSuffix = 'Service';
 $server->testUrl = 'http://api.j7.x1.cn/?api=%action%';
 
 $server->onServerCreate = function(HttpServer $server){

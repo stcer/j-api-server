@@ -63,5 +63,5 @@ $di = Container::getInstance();
 $di->set('config', $config);
 $di->registerProviders([
     j\db\ServiceProvider::class,
-    j\api\ApiServerProvider::class
+    j\api\ServerProvider::class
 ]);

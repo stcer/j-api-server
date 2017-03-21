@@ -38,7 +38,6 @@ var exports =  {
                 return;
             }
 
-
             if(!this.isInit){
                 // todo, init params
                 this.isInit = true;

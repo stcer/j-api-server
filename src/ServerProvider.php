@@ -18,7 +18,7 @@ use j\log\Log;
 use j\log\File as FileLog;
 use j\base\Config;
 
-class ApiServerProvider implements ServiceProviderInterface{
+class ServerProvider implements ServiceProviderInterface{
 
     /**
      * @var Config

@@ -14,15 +14,16 @@
                 <form>
                     <div class="form-group" v-for="arg in func.args">
                         <label for="exampleInputEmail1">{{arg.name}}</label>
-                        <input type="text" class="form-control" v-model="arg.value"
-                               placeholder="{{arg.value != undefined ? arg.value : ''}}">
+                        <input type="text" class="form-control"
+                               v-model="arg.value"
+                               :placeholder="arg.value != undefined ? arg.value : ''">
                     </div>
                 </form>
                 <strong>请求地址</strong>
                 {{url}}
             </div>
             <div class="modal-footer">
-                <a href="{{url}}" target="_blank" class="btn btn-primary">Submit</a>
+                <a :href="url" target="_blank" class="btn btn-primary">Submit</a>
             </div>
         </div>
     </div>
