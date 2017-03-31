@@ -14,6 +14,10 @@ var exports = {
             return this.func.doc.length > 0;
         },
 
+        args : function(){
+            return this.func.args;
+        },
+
         url : function(){
             var api = this.api;
 

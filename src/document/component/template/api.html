@@ -5,7 +5,8 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th width="80%">方法名</th>
+            <th width="60%">方法</th>
+            <th width="20%">描述</th>
             <th width="20%">测试</th>
         </tr>
         </thead>
@@ -14,10 +15,10 @@
             <td v-on:click="toggle(key)">
                 <span style="color: #000">{{func.func}}</span>
                 <div style="margin:15px 0 0 50px; color: #666">
-                    {{func.desc}}
                     <pre style="border: none" v-show="func.isShow">{{func.doc|annotation}}</pre>
                 </div>
             </td>
+            <td v-on:click="toggle(key)">{{func.desc}}</td>
             <td data-toggle="modal" data-target="#myModal">测试接口</td>
         </tr>
         </tbody>

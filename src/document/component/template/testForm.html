@@ -12,9 +12,12 @@
                 <h3>{{api}}.{{func.name}}</h3>
                 <pre v-if="hasDoc">{{func.doc}}</pre>
                 <form>
-                    <div class="form-group" v-for="arg in func.args">
-                        <label for="exampleInputEmail1">{{arg.name}}</label>
-                        <input type="text" class="form-control"
+                    <div class="form-group"
+                         v-for="arg in args">
+
+                        <label>{{arg.name}}</label>
+                        <input type="text"
+                               class="form-control"
                                v-model="arg.value"
                                :placeholder="arg.value != undefined ? arg.value : ''">
                     </div>
@@ -28,3 +31,4 @@
         </div>
     </div>
 </div>
+

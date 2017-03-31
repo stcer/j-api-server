@@ -196,6 +196,8 @@ class Document extends Base{
                 if($param->isDefaultValueAvailable()){
                     $arg['value'] = $param->getDefaultValue();
                     $expression .=  " = " . str_replace("\n", "", var_export($arg['value'], true));
+                } else {
+                    $arg['value'] = "";
                 }
                 $item['args'][] = $arg;
                 $argsString[] = $expression;
