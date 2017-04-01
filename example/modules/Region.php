@@ -3,6 +3,7 @@
 namespace api;
 
 use j\db\Table;
+use Exception;
 
 /**
  * Class 地区组件
@@ -47,7 +48,7 @@ class Region{
             $cond = array('id' => $cond);
         }
         if(!is_array($cond)){
-            throw new Exception("Invalid cid", Exception::Arguments);
+            throw new Exception("Invalid cid");
         }
         if(!isset($cond['_fields'])){
             $cond['_fields'] = ['id', 'name', 'pid'];
