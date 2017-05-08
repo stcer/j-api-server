@@ -81,12 +81,10 @@ class Document extends Base{
             $name = str_replace('.php', '', $name);
             $name = preg_replace("/{$this->loader->classSuffix}$/", '', $name);
             $name = str_replace('/', '.', $name);
-            $name = strtolower($name);
-            
-            if(in_array($name, $this->excludeClasses)){
+
+            if(in_array(strtolower($name), $this->excludeClasses)){
                 continue;
             }
-
             $data[] = $name;
         }
 
