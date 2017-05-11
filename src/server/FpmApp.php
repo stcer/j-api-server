@@ -35,18 +35,14 @@ class FpmApp extends Base {
                 'code' => 200,
                 'data' => $rs
                 ];
-        } catch (Exception $e){
-            $info = $e->getInfo();
-            $data = [
-                'code' => $e->getCode(),
-                'message' => $e->getMessage(),
-                'errors' => $info,
-                ];
         } catch (\Exception $e){
             $data = [
                 'code' => $e->getCode(),
                 'message' => $e->getMessage()
                 ];
+            if(method_exists($e, 'getInfo')){
+                $data['errors'] = $e->getInfo();
+            }
         }
 
         if(ArrayUtils::gav($req, 'debug')){
