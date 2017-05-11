@@ -50,6 +50,7 @@ class FpmApp extends Base {
         }
 
         $this->log("request: {$_SERVER['REQUEST_URI']}", 'debug');
+        $this->log($req, 'debug');
         $this->log($data, 'debug');
 
         $response->send($data, ArrayUtils::gav($req, 'pretty', false), $this->charset);
