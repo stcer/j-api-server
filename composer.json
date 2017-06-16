@@ -28,14 +28,14 @@
     ],
 
     "require": {
-        "ext-yar" : "*",
-        "stcer/j-tcp" : "dev-master",
-        "stcer/j-http" : "dev-master",
-        "stcer/syar" : "dev-master",
         "stcer/j-core" : "dev-master"
     },
 
     "suggest": {
+        "ext-yar" : "*",
+        "stcer/j-tcp" : "dev-master",
+        "stcer/j-http" : "dev-master",
+        "stcer/syar" : "dev-master",
         "stcer/j-api-client": ""
     },
 
