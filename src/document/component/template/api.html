@@ -12,8 +12,8 @@
         </thead>
         <tbody>
         <tr v-for="(func, key) in funcs" v-on:click="test(key)">
-            <td v-on:click="toggle(key)">
-                <span style="color: #000">{{func.func}}</span>
+            <td>
+                <span style="color: #000"  v-on:click="toggle(key)">{{func.func}}</span>
                 <div style="margin:15px 0 0 50px; color: #666">
                     <pre style="border: none" v-show="func.isShow">{{func.doc|annotation}}</pre>
                 </div>
