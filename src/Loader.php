@@ -10,8 +10,8 @@ use Closure;
  */
 class Loader{
 
-    protected $nsPrefix = '\\api\\action\\';
     public $classSuffix = '';
+    protected $nsPrefix = '\\api\\action\\';
     protected $apiMap = [];
 
     /**

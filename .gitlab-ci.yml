@@ -5,3 +5,4 @@ build-composer-package:
     stage: build
     only:
         - tags
+        - master

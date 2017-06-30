@@ -113,7 +113,7 @@ class Document extends Base{
     }
 
     function getApiDocument($api, $initParams = []){
-        $object = Loader::getInstance()->getClass($api, $initParams);
+        $object = $this->loader->getClass($api, $initParams);
         $class = new ReflectionClass(get_class($object));
         $data = [
             'method' => $this->getMethods($class),
