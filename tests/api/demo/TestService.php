@@ -5,7 +5,7 @@ namespace j\api\demo;
 use \j\api\Base;
 
 /**
- * Class Test
+ * Class TestService
  *
  * @apiInit(
  *     {name: 'a', 'desc' : 'test init param', 'value' : 1},

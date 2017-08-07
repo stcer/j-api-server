@@ -61,6 +61,8 @@ class SwooleHttp extends Base {
      */
     public function handle($request, $response, $actionPath){
         $api = trim($actionPath, '/');
+        $api = trim($api, '?');
+        $api = trim($api, '&');
 //        $timer = new Timer();
         $get = $request->get;
         if(isset($request->post) && $request->post) {
@@ -99,7 +101,6 @@ class SwooleHttp extends Base {
         }
 
         $data = $this->process($get, $api);
-
         $this->response($request, $response, $data);
 //        echo $timer->stop() . "\n";
     }

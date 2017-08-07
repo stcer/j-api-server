@@ -26,7 +26,7 @@ var exports = {
             }
 
             var url = PApi.testUrl(api);
-            if(url.indexOf('?')){
+            if(url.indexOf('?') !== -1){
                 url += '&';
             } else {
                 url += '?';

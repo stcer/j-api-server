@@ -19,7 +19,7 @@ class Base {
     public $loader;
     public $isInner = 1;
     public $charset = "utf8";
-    public $testUrl = '/api/%action%/';
+    public $testUrl = '/api/%action%';
 
     /**
      * @var callback
