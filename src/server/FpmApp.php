@@ -43,6 +43,9 @@ class FpmApp extends Base {
             if(method_exists($e, 'getInfo')){
                 $data['errors'] = $e->getInfo();
             }
+
+            // log error message
+            $this->log($e->getTraceAsString());
         }
 
         if(ArrayUtils::gav($req, 'debug')){
