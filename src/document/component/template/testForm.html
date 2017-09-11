@@ -12,14 +12,12 @@
                 <h3>{{api}}.{{func.name}}</h3>
                 <pre v-if="hasDoc">{{func.doc}}</pre>
                 <form>
-                    <div class="form-group"
-                         v-for="arg in args">
-
-                        <label>{{arg.name}}</label>
-                        <input type="text"
-                               class="form-control"
-                               v-model="arg.value"
-                               :placeholder="arg.value != undefined ? arg.value : ''">
+                    <div class="form-group" v-for="arg in args">
+                    <label>{{arg.name}}</label>
+                    <input type="text"
+                           class="form-control"
+                           v-model="arg.value"
+                           :placeholder="arg.value != undefined ? arg.value : ''">
                     </div>
                 </form>
                 <strong>请求地址</strong>

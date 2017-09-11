@@ -3,6 +3,7 @@
 namespace j\api;
 
 use Closure;
+use j\di\Container;
 
 /**
  * Class Loader
@@ -42,6 +43,10 @@ class Loader{
         return self::$instance;
     }
 
+    protected function getDi(){
+        return Container::getInstance();
+    }
+
     /**
      * @var Base[]
      */
@@ -61,6 +66,7 @@ class Loader{
         if(isset(self::$classCaches[$api])){
             // read cache
             list($class, $action) = self::$classCaches[$api];
+            $class = $this->getDi()->make($class);
             if(method_exists($class, 'setAction')){
                 $class->setAction($action);
             }
@@ -78,7 +84,7 @@ class Loader{
             return $className;
         }
 
-        $class = !is_object($className) ? new $className : $className ;
+        $class = $this->getDi()->make($className);
         if(method_exists($class, 'bootstrap')){
             $class->bootstrap($initParams);
         }
