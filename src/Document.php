@@ -11,9 +11,9 @@ use ReflectionMethod;
 use Reflection;
 use ReflectionClass;
 
-use Phalcon\Annotations\Adapter\Memory as MemoryAdapter;
-use Phalcon\Annotations\Reader;
-use Phalcon\Annotations\Reflection as PhalconReflection;
+use Minime\Annotations\Reader as PHPReader;
+use Minime\Annotations\Parser;
+use Minime\Annotations\Cache\ArrayCache;
 
 /**
  * Class Document
@@ -85,7 +85,7 @@ class Document extends Base{
             if(in_array(strtolower($name), $this->excludeClasses)){
                 continue;
             }
-            $data[] = $name;
+            $data[] = lcfirst($name);
         }
 
         return $data;
@@ -94,22 +94,29 @@ class Document extends Base{
     function getInitParams($api){
         $className = $this->loader->getClass($api, [], true);
 
-        $reader = new Reader();
-        $parsing = $reader->parse($className);
-        $reflection = new PhalconReflection($parsing);
-        $classAnnotations = $reflection->getClassAnnotations();
+        $reader = $this->getAnnotationReader();
+        $classAnnotations = $reader->getClassAnnotations($className);
 
         if(!$classAnnotations || !$classAnnotations->has('apiInit')){
             return [];
         }
 
         $annotation = $classAnnotations->get('apiInit');
-        $params =  $annotation->getArguments();
-        if(!is_array($params)){
-            return [];
+        if(is_string($annotation)){
+            if(preg_match('#^\(#', $annotation)){
+                // 兼容之前使用phalcon解析的文档 @key(...)
+                $annotation = trim($annotation, '()');
+                $annotation = "[" . $annotation . "]";
+                $annotation = json_decode($annotation, true);
+                if(JSON_ERROR_NONE == json_last_error()){
+                    return $annotation;
+                }
+            }
+        } elseif(is_array($annotation)){
+            return $annotation;
         }
 
-        return $params;
+        return [];
     }
 
     function getApiDocument($api, $initParams = []){
@@ -216,22 +223,21 @@ class Document extends Base{
      * @return string
      */
     protected function getMethodTitle($class, $method){
-        $reader = new MemoryAdapter();
-        $annotations = $reader->getMethod($class, $method);
+        $reader = $this->getAnnotationReader();
+        $annotations = $reader->getMethodAnnotations($class, $method);
+
         if(!$annotations->has('desc')){
             return '';
         }
 
-        $annotation = $annotations->get('desc');
-        if($annotation->numberArguments() == 0){
-            return '';
-        }
-
-        $title = $annotation->getArguments()[0];
-        if(!is_string($title)){
-            return '';
-        }
+        $title = $annotations->get('desc');
+        $title = trim($title, '(")');
 
         return $title;
+    }
+
+
+    protected function getAnnotationReader(){
+        return new PHPReader(new Parser(), new ArrayCache());
     }
 }

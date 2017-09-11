@@ -2,11 +2,13 @@
 
 namespace j\api;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * Class DocumentTest
  * @package j\api
  */
-class DocumentTest extends \PHPUnit_Framework_TestCase {
+class DocumentTest extends TestCase {
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -56,7 +58,6 @@ class DocumentTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEquals(true, is_array($docs));
         $this->assertEquals(2, count($docs));
-        var_dump($docs);
 
         $this->assertEquals(true, array_key_exists('method', $docs));
         $this->assertEquals(1, count($docs['method']));

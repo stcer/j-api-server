@@ -33,6 +33,7 @@
 
     "suggest": {
         "ext-yar" : "*",
+        "minime/annotations": "~3.0",
         "stcer/j-tcp" : "dev-master",
         "stcer/j-http" : "dev-master",
         "stcer/syar" : "dev-master",
