@@ -197,7 +197,7 @@ class Document extends Base{
             foreach($params as $param){
                 $arg = []; $expression = '';
                 $arg['name'] = $param->getName();
-                $arg['type'] = $param->getType();
+                $arg['type'] = method_exists($param, 'getType') ? $param->getType() . '' : null;
                 $expression .= $arg['name'];
                 if($param->isDefaultValueAvailable()){
                     $arg['value'] = $param->getDefaultValue();
@@ -208,6 +208,7 @@ class Document extends Base{
                 $item['args'][] = $arg;
                 $argsString[] = $expression;
             }
+
             $func .= implode(', ', $argsString) . ")";
             $item['func'] = $func;
 
