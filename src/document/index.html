@@ -29,6 +29,11 @@
     .list-group a{
         display: block;
     }
+
+    #slider{
+        height: 420px;
+        overflow-y: scroll;
+    }
     </style>
 </head>
 <body style="padding-top: 70px;">
@@ -54,7 +59,7 @@
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas docs-sidebar">
             <h4>Api list</h4>
 
-            <div class="list-group">
+            <div class="list-group" id="slider">
                 <router-link class="list-group-item"
                         v-for="name in apis"
                         :to="{path : '/api/' + name}">{{name}}</router-link>
