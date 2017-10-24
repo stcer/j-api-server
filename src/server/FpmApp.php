@@ -18,6 +18,8 @@ class FpmApp extends Base {
     public $response;
 
     public function run(){
+        $this->log("request: {$_SERVER['REQUEST_URI']}", 'debug');
+
         $req = $this->getRequest();
         $response = $this->getResponse();
 
@@ -45,14 +47,13 @@ class FpmApp extends Base {
             }
 
             // log error message
-            $this->log($e->getTraceAsString());
+            $this->log($e->getTraceAsString(), 'error');
         }
 
         if(ArrayUtils::gav($req, 'debug')){
             var_dump($data);
         }
 
-        $this->log("request: {$_SERVER['REQUEST_URI']}", 'debug');
         $this->log($req, 'debug');
         $this->log($data, 'debug');
 
