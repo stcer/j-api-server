@@ -21,8 +21,6 @@ class FpmApp extends Base {
         $this->log("request: {$_SERVER['REQUEST_URI']}", 'debug');
 
         $req = $this->getRequest();
-        $response = $this->getResponse();
-
         if($this->charset == 'gbk'){
             $req = Strings::toGbk($req);
         }
@@ -57,6 +55,7 @@ class FpmApp extends Base {
         $this->log($req, 'debug');
         $this->log($data, 'debug');
 
+        $response = $this->getResponse();
         $response->send($data, ArrayUtils::gav($req, 'pretty', false), $this->charset);
     }
 
@@ -85,6 +84,7 @@ class FpmApp extends Base {
     protected function getRequest(){
         if(!isset($this->request)){
             $this->request = $_REQUEST;
+            $this->normalizesRequest($this->request);
         }
         return $this->request;
     }

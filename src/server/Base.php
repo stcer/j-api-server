@@ -115,4 +115,18 @@ class Base {
         $method = str_replace('document.', '', $api);
         return call_user_func_array(array($doc, $method), $args);
     }
+
+
+    /**
+     * 格式化请求参数, 以支持json格式传递请求数据
+     * @param $request
+     */
+    protected function normalizesRequest(& $request){
+        if(isset($request['_format'])
+            && $request['_format'] = 'json'
+                && isset($request['_query'])
+        ){
+            $request = json_encode($request, true) + $request;
+        }
+    }
 }

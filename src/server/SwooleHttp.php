@@ -17,6 +17,10 @@ use j\api\base\Strings;
  *
  */
 class SwooleHttp extends Base {
+    /**
+     * bind ip address
+     * @var string
+     */
     public $host = '0.0.0.0';
     public $port = '8061';
     public $options = [];
@@ -32,13 +36,14 @@ class SwooleHttp extends Base {
     public $onServerCreate;
 
     /**
-     *
+     * 启动服务运行
      */
     public function run(){
         $server = $this->server = new Server($this->host, $this->port);
 
         $server->cgiPathPrefix = "/api/";
         $server->documentRoot = dirname(__DIR__) . "/document/";
+        // 动态请求调试
         $server->dynamicParser = array($this, 'handle');
 
         $server->setOption($this->options);
@@ -60,18 +65,15 @@ class SwooleHttp extends Base {
      * @throws Exception
      */
     public function handle($request, $response, $actionPath){
+        //$timer = new Timer();
         $api = trim($actionPath, '/');
         $api = trim($api, '?');
         $api = trim($api, '&');
-//        $timer = new Timer();
-        $get = $request->get;
-        if(isset($request->post) && $request->post) {
-            $get = $request->post + $get;
-        }
-        
+        $reqArgs = $this->getRequestParams($request);
+
         if($api == 'calls'){
             // 批量请求
-            if(!isset($get['data']) || !($data = $get['data'])){
+            if(!isset($reqArgs['data']) || !($data = $reqArgs['data'])){
                 throw new Exception("Invalid request for calls");
             }
 
@@ -93,16 +95,29 @@ class SwooleHttp extends Base {
         }
 
         if(!$api){
-            if(isset($get['api'])){
-                $api = $get['api'];
+            if(isset($reqArgs['api'])){
+                $api = $reqArgs['api'];
             } else {
                 throw new Exception("Invalid request");
             }
         }
 
-        $data = $this->process($get, $api);
+        $data = $this->process($reqArgs, $api);
         $this->response($request, $response, $data);
 //        echo $timer->stop() . "\n";
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    protected function getRequestParams($request){
+        $args = $request->get;
+        if(isset($request->post) && $request->post) {
+            $args = $request->post + $args;
+        }
+        $this->normalizesRequest($args);
+        return $args;
     }
 
     /**
