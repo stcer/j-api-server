@@ -124,9 +124,10 @@ class Base {
     protected function normalizesRequest(& $request){
         if(isset($request['_format'])
             && $request['_format'] = 'json'
-                && isset($request['_query'])
+            && isset($request['_query'])
+            && is_string($request['_query'])
         ){
-            $request = json_encode($request, true) + $request;
+            $request = json_decode($request['_query'], true) + $request;
         }
     }
 }
