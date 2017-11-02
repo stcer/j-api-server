@@ -26,16 +26,6 @@ class Exception extends E {
     protected $level = E_WARNING;
 
     /**
-     * Exception constructor.
-     * @param string $message
-     * @param int $code
-     * @param E|null $previous
-     */
-    public function __construct($message = "", $code = 0, E $previous = null) {
-        parent::__construct($message, (int) $code, $previous);
-    }
-
-    /**
      * @param mixed $info
      */
     public function setInfo($info) {
