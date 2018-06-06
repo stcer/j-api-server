@@ -22,8 +22,7 @@ abstract class ArrayUtils {
      * @param $arr
      * @param $key
      * @param null $def
-     * @return null
-     * @throws Exception
+     * @return mixed|null
      */
     public static function gav($arr, $key, $def = null) {
         if(is_array($arr)){

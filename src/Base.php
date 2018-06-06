@@ -50,7 +50,6 @@ class Base{
                     }
                 }
             }
-
         } else if(method_exists($this, 'execute')){
             return call_user_func(array($this, 'execute'), $args);
         }

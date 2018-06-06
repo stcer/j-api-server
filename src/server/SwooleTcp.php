@@ -12,9 +12,14 @@ use j\api\base\Strings;
 class SwooleTcp extends Base {
     public $host = '0.0.0.0';
     public $port = '8063';
+    public $options = [];
 
+    /**
+     * @throws \Exception
+     */
     public function run(){
         $server = new TcpServer($this->host, $this->port);
+        $server->setOption($this->options);
 
         /** @var  $protocol \j\network\Tcp\Protocol */
         $protocol = $server->getProtocol();
@@ -24,7 +29,11 @@ class SwooleTcp extends Base {
             if($this->charset == 'gbk'){
                 $data = Strings::toGbk($data);
             }
-            $rs = $this->execute($request['call'], isset($data['init']) ? $data['init'] : [], $data['args']);
+            $rs = $this->execute(
+                $request['call'],
+                isset($data['init']) ? $data['init'] : [],
+                $data['args']
+            );
             if($this->charset == 'gbk'){
                 $rs = Strings::utf8($rs);
             }

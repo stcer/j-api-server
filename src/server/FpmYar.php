@@ -4,7 +4,6 @@ namespace j\api\server;
 
 use Yar_Server as Server;
 use j\api\base\ArrayUtils;
-use j\api\Loader;
 use j\api\Exception;
 
 class FpmYar extends Base{
@@ -47,7 +46,7 @@ class FpmYar extends Base{
 
         $api = str_replace("/", ".", $api);
         if(!preg_match('/^[a-zA-Z\.]+$/', $api)){
-            throw new Exception("Invalid api(1)", Exception::API);
+            throw new Exception("Invalid api(1)");
         }
 
         $this->api = $api;

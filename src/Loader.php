@@ -109,7 +109,7 @@ class Loader{
      */
     protected function findClass($api, $oldApi = ''){
         if(!is_string($api)){
-            throw new Exception("Invalid api({$api})", Exception::API);
+            throw new Exception("Invalid api({$api})", Exception::API_NOT_FOUND);
         }
 
         if(!$oldApi){
@@ -127,7 +127,7 @@ class Loader{
             if($path){
                 return $this->findClass(implode('.', $path), $oldApi);
             }else{
-                throw new Exception("Api not found({$api}:{$apiClass})", Exception::API);
+                throw new Exception("Api not found({$api}:{$apiClass})", Exception::API_NOT_FOUND);
             }
         }
 
@@ -138,6 +138,13 @@ class Loader{
         }
 
         return [$apiClass, $action];
+    }
+
+    /**
+     * @param string $classSuffix
+     */
+    public function setClassSuffix($classSuffix){
+        $this->classSuffix = $classSuffix;
     }
 
 

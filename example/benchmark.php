@@ -2,74 +2,56 @@
 
 namespace j\api\example;
 
-use j\debug\Profiler;
-use j\api\client\SwooleYar as ClientYar;
-use j\api\client\Tcp as ClientTcp;
-use j\api\client\FpmYar as ClientFpmYar;
-use j\api\client\HttpJson as ClientHttpJson;
-use j\api\client\SwooleHttp;
+use j\api\client\Client;
+use j\base\Config;
 use Exception;
+use j\log\Log;
 
-$vendorPath = realpath(__DIR__ . "/../vendor/");
-$loader = include($vendorPath . "/autoload.php");
+include(__DIR__ . "/init.inc.php");
 
 /**
  * @param $type
  * @param string $api
- * @return \j\api\client\Base
+ * @return Client|Client[]
  * @throws Exception
  */
 function getClient($type, $api = ''){
-    switch ($type){
-        case 'fpmHttp' :
-            $client = ClientHttpJson::getInstance($api);
-            $client->serverAddress = 'http://api.j7.x1.cn/index.php';
-            break;
-        case 'fpmYar' :
-            $client = ClientFpmYar::getInstance($api);
-            $client->serverAddress = 'http://api.j7.x1.cn/yar.php';
-            break;
+    $confs = [
+        'http' => 'http://api.j7.x2.cn/index.php',
+        'yar' => 'http://api.j7.x2.cn/yar.php',
+        'httpSwoole' => 'http://127.0.0.1:' . Config::getInstance()->get('apiServer.http.port'),
+        'yarSwoole' => 'http://127.0.0.1:' . Config::getInstance()->get('apiServer.yar.port'),
+        'tcp' => ['127.0.0.1', Config::getInstance()->get('apiServer.tcp.port')],
+    ];
 
-        case 'swooleHttp' :
-            $client = SwooleHttp::getInstance($api);
-            $client->serverAddress = 'http://127.0.0.1:8061';
-            break;
-
-        case 'swooleYar' :
-            ClientYar::$serverUrl = 'http://127.0.0.1:8062';
-            $client = ClientYar::getInstance($api);
-            break;
-        case 'tcp' :
-            $client = ClientTcp::getInstance($api);
-            $client->port = 8063;
-            $client->server = '127.0.0.1';
-            break;
-        default :
-            throw new Exception("Invalid client type");
+    if(!isset($confs[$type])){
+        throw new Exception("Invalid client type");
     }
-    return $client;
+    $config = new \j\api\client\Config('jz-test', '123123');
+    $config->setTimeout(10);
+    $config->setProtocol($type);
+    $config->setEndPoint($confs[$type]);
+    //$config->setLogger(new Log());
+    return Client::getInstance($config)->getRpc($api);
 }
 
-function testBatch1($client){
-    for($i = 0; $i < 10; $i++){
-        $client->callApi('test.name', ['test']);
-        $client->callApi('test.search', ['search']);
-    }
-}
-
+/**
+ * @param Client $client
+ */
 function testBatch($client){
     $calls = array();
     for($i = 0; $i < 10; $i++){
         $calls["test.name_{$i}"] = [
             'api' => 'test.name',
-            'params' => [rand(1, 100)]
+            'args' => [rand(1, 100)]
         ];
-        $calls["test.search {$i}"] = [
+        $calls["test.search_{$i}"] = [
             'api' => 'test.search',
-            'params' => [rand(1, 100)]
+            'args' => [rand(1, 100)]
         ];
     }
     $data = $client->calls($calls);
+    var_dump($data);
 }
 
 function testObject($object){
@@ -84,14 +66,21 @@ function testObject($object){
     var_dump($rs5);
 }
 
-function test($types = ['swooleYar', 'fpmYar']){
+function testApi($client){
+    for($i = 0; $i < 10; $i++){
+        $client->callApi('test.name', ['test']);
+        $client->callApi('test.search', ['search']);
+    }
+}
+
+function test($types){
     $timer = new \j\api\base\Timer();
     $times = [];
     foreach($types as $type){
         $timer->start();
-        testBatch(getClient($type));
-        //testBatch1(getClient($type));
         testObject(getClient($type, 'test'));
+        testBatch(getClient($type));
+        testApi(getClient($type));
         $times[$type] = $timer->stop();
     }
 
@@ -99,4 +88,4 @@ function test($types = ['swooleYar', 'fpmYar']){
     var_dump($times);
 }
 
-test(['fpmHttp', 'fpmYar',  'swooleHttp', 'swooleYar', 'tcp']);
+test(['http', 'yar', 'httpSwoole', 'yarSwoole', 'tcp']);

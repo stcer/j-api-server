@@ -73,7 +73,7 @@ class FpmApp extends Base {
 
         $api = preg_replace('#\\/#', '.', $api);
         if(!preg_match('/^[a-zA-Z\.]+$/', $api)){
-            throw new Exception("Invalid api(1)", Exception::API);
+            throw new Exception("Invalid api(1)", Exception::API_NOT_FOUND);
         }
         return $api;
     }

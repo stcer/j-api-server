@@ -28,26 +28,33 @@
     ],
 
     "require": {
-        "stcer/j-core" : "dev-master"
+        "php": ">=5.5.0",
+        "stcer/j-core" : "dev-master",
+        "stcer/j-api-doc": "^0.2.3"
     },
 
     "suggest": {
         "ext-yar" : "*",
-        "minime/annotations": "~3.0",
-        "stcer/j-tcp" : "dev-master",
-        "stcer/j-http" : "dev-master",
-        "stcer/syar" : "dev-master",
-        "stcer/j-api-client": ""
+        "stcer/j-http": "^0.2.0",
+        "stcer/syar": "^0.2.1",
+        "stcer/j-tcp": "^0.1.1",
+        "stcer/j-api-doc" : "*",
+        "stcer/j-api-client": "*"
     },
 
     "require-dev" : {
         "stcer/ide-doc" : "*",
         "stcer/j-db" : "dev-master",
+        "stcer/j-api-client": "dev-master",
         "lox/xhprof" : "dev-master",
-        "stcer/j-api-client": "dev-master"
+        "stcer/j-http": "^0.2.0",
+        "stcer/syar": "^0.2.1",
+        "stcer/j-tcp": "^0.1.1"
     },
 
     "config" : {
         "secure-http" : false
-    }
+    },
+
+    "bin" : ["bin/apiServer.php"]
 }
