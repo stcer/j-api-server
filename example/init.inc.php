@@ -52,7 +52,7 @@ $config->set('apiServer', [
             'worker_num' => 10,
             'task_worker_num' => 10,
             'package_max_length' => 1024 * 4,
-            'max_request' => 10,
+            'max_request' => 10000,
         ]
     ],
 
@@ -65,7 +65,7 @@ $config->set('apiServer', [
         'log' => $_tmpDir . '/log/yar_swoole.log',
         'swoole' => [
             'worker_num' => 10,
-            'max_request' => 20,
+            'max_request' => 20000,
             'task_worker_num' => 10,
         ]
     ],
@@ -79,7 +79,7 @@ $config->set('apiServer', [
         'log' => $_tmpDir . '/log/tcp.log',
         'swoole' => [
             'worker_num' => 10,
-            'max_request' => 20,
+            'max_request' => 20000,
             'task_worker_num' => 10,
         ]
     ],

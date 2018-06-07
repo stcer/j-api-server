@@ -188,7 +188,7 @@ array(5) {
 *   服务端api接口数据编码方式受 $server->charset控制
 *   所有客户端的请求参数为utf8编码
 
-## 地址格式
+## 通信地址格式
 *   Fpm http : server_url?api=&args=&init=
 *   Swoole http: 
     1. server_url/api/API_NAME?args=&init= 
