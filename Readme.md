@@ -201,7 +201,8 @@ array(5) {
 
 1. 版本支持, 参考api-simple
 2. mock数据支持, 参考 api-simple
-3. server 日志, 错误及调试日志
+3. 完善server 日志, 错误及调试日志
+4. 
 
 
 ## 异常记录

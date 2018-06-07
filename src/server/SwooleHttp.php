@@ -115,7 +115,7 @@ class SwooleHttp extends Base {
                 if(!isset($call['api'])){
                     throw new Exception("Invalid request api for calls");
                 }
-                $requests[] = ['process', [$call, $call['api']]];
+                $requests[$index] = ['process', [$call, $call['api']]];
             }
 
             $taskManager = $this->server->taskManager;

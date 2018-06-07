@@ -5,6 +5,7 @@ namespace j\api\example;
 use Exception;
 use j\api\client\Client;
 use j\base\Config;
+use j\log\Log;
 
 require dirname(__DIR__) . '/init.inc.php';
 
@@ -30,6 +31,6 @@ function getClient($type, $api = ''){
     $config->setTimeout(10);
     $config->setProtocol($type);
     $config->setEndPoint($confs[$type]);
-    //$config->setLogger(new Log());
+    $config->setLogger(new Log());
     return Client::getInstance($config)->getRpc($api);
 }
