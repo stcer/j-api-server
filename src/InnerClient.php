@@ -2,13 +2,11 @@
 
 namespace j\api;
 
-use j\api\client\Base as Abase;
-
 /**
  * Class Inner
  * @package j\api\client
  */
-class InnerClient extends Abase{
+class InnerClient{
     static public $apiMaps = [
         'region' => 'comm.region'
         ];
