@@ -5,11 +5,8 @@ namespace j\api\example;
 ini_set('display_errors', 1);
 error_reporting(E_ALL ^ E_NOTICE);
 
-use Exception;
 use j\api\client\Client;
-use j\base\Config;
 use j\debug\Profiler;
-use j\log\Log;
 
 require __DIR__ . "/init.inc.php";
 
@@ -25,67 +22,59 @@ STR;
 }
 
 Profiler::start();
-LocalTest::run($type);
+ClientTest::run($type);
 Profiler::stop();
 
 /**
- * Class LocalTest
+ * Class ClientTest
  */
-class LocalTest {
+class ClientTest {
+
+    protected $type;
 
     /**
-     * @param $type
-     * @param $api
-     * @return Client
-     * @throws Exception
+     * @var Client
      */
-    static function getClient($type, $api = ''){
-        $confs = [
-            'http' => 'http://api.j7.x2.cn/index.php',
-            'yar' => 'http://api.j7.x2.cn/yar.php',
-            'httpSwoole' => 'http://127.0.0.1:' . Config::getInstance()->get('apiServer.http.port'),
-            'yarSwoole' => 'http://127.0.0.1:' . Config::getInstance()->get('apiServer.yar.port'),
-            'tcp' => ['127.0.0.1', Config::getInstance()->get('apiServer.tcp.port')],
-        ];
+    protected $client;
 
-        if(!isset($confs[$type])){
-            throw new Exception("Invalid client type");
-        }
-        $config = new \j\api\client\Config('jz-test', '123123');
-        $config->setProtocol($type);
-        $config->setEndPoint($confs[$type]);
-//        $config->setLogger(new Log());
-        return Client::getInstance($config)->getRpc($api);
+    /**
+     * ClientTest constructor.
+     * @param $type
+     */
+    public function __construct($type){
+        $this->type = $type;
+        $this->client = getClient(($type));
     }
+
 
     static function  run($type){
-        self::testApi(self::getClient($type));
-        self::testRpc(self::getClient($type, 'test'));
-        self::testBatch(self::getClient($type));
-    }
+        $test = new self($type);
 
-    /**
-     * @param Client $client
-     */
-    static function testApi($client){
         echo "----------------------- \n";
         echo "Start api test: \n\n";
+        $test->testApi();
 
+        echo "----------------------- \n";
+        echo "Start rpc test: \n\n";
+        $test->testRpc();
+
+        echo "----------------------- \n";
+        echo "Start batch test: \n\n";
+        $test->testBatch();
+    }
+
+    function testApi(){
+
+        $client = $this->client;
         $rs1 = $client->callApi('test.name', ["test"]);
         $rs2 = $client->callApi('test.getName', ["test"]);
         var_dump($rs1);
         var_dump($rs2);
     }
 
-// call 2
-
-    /**
-     * @param $testNews
-     */
-    static function testRpc($testNews){
-        echo "----------------------- \n";
-        echo "Start rpc test: \n\n";
-
+    function testRpc(){
+        $client = $this->client;
+        $testNews = $client->getRpc('test');
         $rs2 = $testNews->name("Test2");
         $rs3 = $testNews->search("Test2");
         $rs4 = $testNews->getName();
@@ -99,12 +88,9 @@ class LocalTest {
 
     /**
      * batch request
-     * @param Client $client
      */
-    static function testBatch($client){
-        echo "----------------------- \n";
-        echo "Start batch test: \n\n";
-
+    function testBatch(){
+        $client = $this->client;
         $calls = array();
         for($i = 0; $i < 2; $i++){
             $calls["test.name_{$i}"] = [

@@ -35,20 +35,19 @@
 
     "suggest": {
         "ext-yar" : "*",
-        "stcer/j-http": "^0.2.0",
         "stcer/syar": "^0.2.1",
+        "stcer/j-http": "^0.2.0",
         "stcer/j-tcp": "^0.1.1",
-        "stcer/j-api-doc" : "*",
-        "stcer/j-api-client": "*"
+        "stcer/j-api-client": "*",
+        "lox/xhprof" : "dev-master"
     },
 
     "require-dev" : {
         "stcer/ide-doc" : "*",
         "stcer/j-db" : "dev-master",
         "stcer/j-api-client": "dev-master",
-        "lox/xhprof" : "dev-master",
-        "stcer/j-http": "^0.2.0",
         "stcer/syar": "^0.2.1",
+        "stcer/j-http": "^0.2.0",
         "stcer/j-tcp": "^0.1.1"
     },
 
