@@ -35,12 +35,17 @@ composer require stcer/j-api-client
 
 ## 服务配置
 
+配置与服务注册可以在引导文件内完成, 以便使用命令工具启动服务使用, 参考样例引导文件
+
+> example/init.inc.php 
+
+A 配置服务参数, 如监听地址/端口/日志等
 ```
 # 参考 example/init.inc.php
 $_tmpDir = PATH_ROOT . '/tmp/';
 
 return [
-   'ns' => 'api\\action\\',
+   'ns' => 'api\\action\\', # 此名称空间应该在引导文件注册到自动加载
    'classSuffix' => '',
    'logFile' => $_tmpDir . '/log/api.log',
    'logMode' => 31,
@@ -98,6 +103,16 @@ return [
 ];
 ```
 
+B 注册服务容器
+```
+$di = Container::getInstance();
+$di->set('config', $config);
+$di->registerProviders([
+    j\api\ServerProvider::class
+]);
+```
+
+
 ## 服务端命令行工具
 
 用于启动各类服务
@@ -124,10 +139,10 @@ Options:
         tcp: tcp server
 
 # http server
-php ../bin/apiServer.php -b init.inc.php -a start -t http -d
+php bin/apiServer.php -b example/init.inc.php -a start -t http
 
 # doc server
-php bin/apiServer.php -t doc -a start -b example/init.inc.php -v
+php bin/apiServer.php -b example/init.inc.php -t doc -a start -v
 
 ```
 
