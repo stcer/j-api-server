@@ -6,8 +6,8 @@ use Exception;
 use j\network\http\Server;
 use j\network\http\Request;
 use j\network\http\Response;
-use j\api\base\JsonPretty;
-use j\api\base\Strings;
+use j\tool\JsonPretty;
+use j\tool\Strings;
 
 /**
  * Class SwooleHttp

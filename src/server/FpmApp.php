@@ -3,9 +3,9 @@
 namespace j\api\server;
 
 use j\api\Exception;
-use j\api\base\ArrayUtils;
-use j\api\base\JsonOutput;
-use j\api\base\Strings;
+use j\tool\ArrayUtils;
+use j\api\JsonOutput;
+use j\tool\Strings;
 
 /**
  * Class AppJson

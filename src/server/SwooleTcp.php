@@ -3,7 +3,7 @@
 namespace j\api\server;
 
 use j\network\tcp\Server as TcpServer;
-use j\api\base\Strings;
+use j\tool\Strings;
 
 /**
  * Class SwooleTcp

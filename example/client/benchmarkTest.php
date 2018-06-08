@@ -23,7 +23,7 @@ STR;
     exit;
 }
 
-$timer = new \j\api\base\Timer();
+$timer = new Timer();
 $times = [];
 foreach($types as $type){
     $times[$type] = (new BenchmarkTest($type))->test($timer);

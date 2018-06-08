@@ -3,7 +3,7 @@
 namespace j\api\server;
 
 use Yar_Server as Server;
-use j\api\base\ArrayUtils;
+use j\tool\ArrayUtils;
 use j\api\Exception;
 
 class FpmYar extends Base{

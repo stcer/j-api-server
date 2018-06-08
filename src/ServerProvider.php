@@ -2,18 +2,20 @@
 
 namespace j\api;
 
-use j\api\base\ArrayUtils;
-use j\api\server\Base;
-use j\apiDoc\AppServer;
-use j\apiDoc\Document;
+use j\tool\ArrayUtils;
+
 use j\di\Container;
 use j\di\ServiceProviderInterface;
 
+use j\api\server\Base;
 use j\api\server\FpmApp as FpmApp;
 use j\api\server\FpmYar as YarFpm;
 use j\api\server\SwooleHttp as HttpSwoole;
 use j\api\server\SwooleYar as YarSwoole;
 use j\api\server\SwooleTcp as TcpSwoole;
+
+use j\apiDoc\AppServer;
+use j\apiDoc\Document;
 
 use j\network\http\Server as HttpServer;
 use j\network\tcp\Server as TcpServer;

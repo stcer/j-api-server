@@ -4,7 +4,7 @@ namespace j\api\server;
 
 use syar\Server;
 use j\api\Exception;
-use j\api\base\Strings;
+use j\tool\Strings;
 use syar\Token;
 
 /**
